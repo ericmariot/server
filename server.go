@@ -13,11 +13,10 @@ func Server() {
 		Addr:    "localhost:" + port,
 		Handler: mux,
 	}
+	mux.Handle("/", http.FileServer(http.Dir(".")))
 
 	log.Printf("Serving on port: %s\n", port)
-
-	err := server.ListenAndServe()
-	if err != nil {
+	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Could not listen on port %s\n", port)
 	}
 }
