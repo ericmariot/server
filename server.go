@@ -20,8 +20,8 @@ func Server() {
 
 	mux := http.NewServeMux()
 	mux.Handle("/app/", apiCfg.middlewareMetricsInc(fileServerHandler))
-	mux.HandleFunc("/healthz", handlerHealth)
-	mux.HandleFunc("/metrics", apiCfg.handlerMetrics)
+	mux.HandleFunc("GET /healthz", handlerHealth)
+	mux.HandleFunc("GET /metrics", apiCfg.handlerMetrics)
 	mux.HandleFunc("/reset", apiCfg.handlerReset)
 
 	server := &http.Server{
